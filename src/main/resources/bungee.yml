@@ -1,0 +1,6 @@
+name: PAF-ChatInspector
+version: ${project.version}
+author: Simonsator
+depends: [PartyAndFriends]
+main: de.simonsator.partyandfriends.chatinspector.PAFChatInspector
+description: An add-on for party and friends to block some words in the private chat
