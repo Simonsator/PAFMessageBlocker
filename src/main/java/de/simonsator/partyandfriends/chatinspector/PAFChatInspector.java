@@ -14,7 +14,7 @@ public class PAFChatInspector extends PAFExtension {
 
 	@Override
 	public void onEnable() {
-		Main.getInstance();
+		Main.getInstance().registerExtension(this);
 		try {
 			Configuration config = (new ChatInspectorConfig(new File(getDataFolder(), "config.yml"))).getCreatedConfiguration();
 			ProxyServer.getInstance().getPluginManager().registerListener(this,
