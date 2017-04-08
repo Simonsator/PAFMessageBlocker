@@ -1,6 +1,7 @@
 package de.simonsator.partyandfriends.chatinspector.listener;
 
 import de.simonsator.partyandfriends.api.events.message.FriendMessageEvent;
+import de.simonsator.partyandfriends.api.events.message.FriendOnlineMessageEvent;
 import de.simonsator.partyandfriends.api.events.message.PartyMessageEvent;
 import de.simonsator.partyandfriends.api.events.message.SimpleMessageEvent;
 import de.simonsator.partyandfriends.api.pafplayers.OnlinePAFPlayer;
@@ -37,13 +38,17 @@ public class ChatListener implements Listener {
 			pEvent.getSender().sendMessage(Friends.getInstance().getPrefix() + DO_NOT_WRITE_THAT);
 	}
 
-	public boolean cancelled(SimpleMessageEvent pEvent) {
+	@EventHandler
+	public void onChat(FriendOnlineMessageEvent pEvent) {
+		onChat((FriendMessageEvent) pEvent);
+	}
+
+	private boolean cancelled(SimpleMessageEvent pEvent) {
 		final OnlinePAFPlayer p = pEvent.getSender();
 		if (!p.hasPermission(PERMISSION)) {
 			String message = pEvent.getMessage().toLowerCase();
 			for (String forbiddenWord : FORBIDDEN)
 				if (message.contains(forbiddenWord)) {
-					p.sendMessage(DO_NOT_WRITE_THAT);
 					pEvent.setCancelled(true);
 					return true;
 				}
