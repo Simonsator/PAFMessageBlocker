@@ -16,7 +16,7 @@ public class PAFChatInspector extends PAFExtension {
 	public void onEnable() {
 		Main.getInstance().registerExtension(this);
 		try {
-			Configuration config = (new ChatInspectorConfig(new File(getDataFolder(), "config.yml"))).getCreatedConfiguration();
+			Configuration config = (new ChatInspectorConfig(new File(getConfigFolder(), "config.yml"))).getCreatedConfiguration();
 			ProxyServer.getInstance().getPluginManager().registerListener(this,
 					new ChatListener(config.getStringList("ForbiddenWords"), config));
 		} catch (IOException e) {
@@ -27,11 +27,5 @@ public class PAFChatInspector extends PAFExtension {
 	@Override
 	public void onDisable() {
 		ProxyServer.getInstance().getPluginManager().unregisterListeners(this);
-	}
-
-	@Override
-	public void reload() {
-		onDisable();
-		onEnable();
 	}
 }
