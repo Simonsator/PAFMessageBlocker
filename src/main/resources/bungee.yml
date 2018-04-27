@@ -1,6 +1,6 @@
-name: Clans-ChatInspector
+name: PAF-ChatInspector
 version: ${project.version}
 author: Simonsator
 depends: [PartyAndFriends]
-main: de.simonsator.partyandfriends.clans.chatinspector.ClansChatInspector
-description: An add-on for clans to block some words in clan chat
+main: de.simonsator.partyandfriends.chatinspector.PAFChatInspector
+description: An add-on for Party & Friends to block some words in clan chat
