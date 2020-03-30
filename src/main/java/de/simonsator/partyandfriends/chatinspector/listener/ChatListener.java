@@ -7,18 +7,16 @@ import de.simonsator.partyandfriends.api.events.message.SimpleMessageEvent;
 import de.simonsator.partyandfriends.api.pafplayers.OnlinePAFPlayer;
 import de.simonsator.partyandfriends.friends.commands.Friends;
 import de.simonsator.partyandfriends.party.command.PartyCommand;
-import net.md_5.bungee.api.plugin.Listener;
-import net.md_5.bungee.config.Configuration;
-import net.md_5.bungee.event.EventHandler;
+import de.simonsator.partyandfriends.utilities.ConfigurationCreator;
 
 import java.util.List;
 
-public class ChatListener implements Listener {
+public abstract class ChatListener {
 	private final List<String> FORBIDDEN;
 	private final String DO_NOT_WRITE_THAT;
 	private final String PERMISSION;
 
-	public ChatListener(List<String> pList, Configuration pConfig) {
+	public ChatListener(List<String> pList, ConfigurationCreator pConfig) {
 		for (int i = 0; i < pList.size(); i++)
 			pList.set(i, pList.get(i).toLowerCase());
 		FORBIDDEN = pList;
@@ -26,21 +24,18 @@ public class ChatListener implements Listener {
 		DO_NOT_WRITE_THAT = pConfig.getString("Messages.DoNotWriteThat");
 	}
 
-	@EventHandler
-	public void onChat(PartyMessageEvent pEvent) {
+	protected void onChatGlobal(PartyMessageEvent pEvent) {
 		if (cancelled(pEvent))
 			pEvent.getSender().sendMessage(PartyCommand.getInstance().getPrefix() + DO_NOT_WRITE_THAT);
 	}
 
-	@EventHandler
-	public void onChat(FriendMessageEvent pEvent) {
+	protected void onChatGlobal(FriendMessageEvent pEvent) {
 		if (cancelled(pEvent))
 			pEvent.getSender().sendMessage(Friends.getInstance().getPrefix() + DO_NOT_WRITE_THAT);
 	}
 
-	@EventHandler
-	public void onChat(FriendOnlineMessageEvent pEvent) {
-		onChat((FriendMessageEvent) pEvent);
+	protected void onChatGlobal(FriendOnlineMessageEvent pEvent) {
+		onChatGlobal((FriendMessageEvent) pEvent);
 	}
 
 	private boolean cancelled(SimpleMessageEvent pEvent) {

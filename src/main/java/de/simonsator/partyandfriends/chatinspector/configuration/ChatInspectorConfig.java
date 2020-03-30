@@ -1,5 +1,6 @@
 package de.simonsator.partyandfriends.chatinspector.configuration;
 
+import de.simonsator.partyandfriends.api.PAFExtension;
 import de.simonsator.partyandfriends.utilities.ConfigurationCreator;
 
 import java.io.File;
@@ -8,17 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatInspectorConfig extends ConfigurationCreator {
-	public ChatInspectorConfig(File file) throws IOException {
-		super(file);
+	public ChatInspectorConfig(PAFExtension pPlugin, File file) throws IOException {
+		super(file, pPlugin);
 		readFile();
 		loadDefaultValues();
 		saveFile();
-		process(configuration);
-	}
-
-	@Override
-	public void reloadConfiguration() throws IOException {
-
+		process();
 	}
 
 	private void loadDefaultValues() {
