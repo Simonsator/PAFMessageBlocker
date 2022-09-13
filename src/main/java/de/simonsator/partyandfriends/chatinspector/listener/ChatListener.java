@@ -17,8 +17,7 @@ public abstract class ChatListener {
 	private final String PERMISSION;
 
 	public ChatListener(List<String> pList, ConfigurationCreator pConfig) {
-		for (int i = 0; i < pList.size(); i++)
-			pList.set(i, pList.get(i).toLowerCase());
+		pList.replaceAll(String::toLowerCase);
 		FORBIDDEN = pList;
 		PERMISSION = pConfig.getString("Permission.Ignore");
 		DO_NOT_WRITE_THAT = pConfig.getString("Messages.DoNotWriteThat");
