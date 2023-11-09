@@ -19,7 +19,7 @@ public class ChatInspectorConfig extends ConfigurationCreator {
 
 	private void loadDefaultValues() {
 		set("UseRegexWhiteList", false);
-		set("RegexWhiteList", "^[\\p{L}\\p{Zs}]+$");
+		set("RegexWhiteList", "^[\\p{L}\\p{Zs}0-9 \\p{Punct}§]+$");
 		set("Permission.Ignore", "partyandfriends.chatinspector.ignore");
 		set("Messages.DoNotWriteThat", "&cYou are not allowed to write that.");
 		List<String> list = new ArrayList<>();
